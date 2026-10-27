@@ -60,3 +60,5 @@ python probe/activate_theme.py restart   # 改模板后必须重启 Halo（不�
 ## 许可
 
 主题代码 MIT；`notes/` 里的文字与站点截图归作者所有。
+
+> 截图走 jsDelivr CDN（国内可直连）。若仍加载不出来，仓库里的 `docs/` 目录有同样的原文件。
