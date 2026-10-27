@@ -9,7 +9,7 @@
 项目与能力清单。所以主题的第一屏不是文章列表，而是一张「档案卡」，往下依次是项目、能力、课程、
 资料柜、记录、视频。
 
-![首页](docs/shot-home.png)
+![首页](https://cdn.jsdelivr.net/gh/hx2167564036-hash/doupi-site@main/docs/shot-home.png)
 
 <p align="center"><i>首屏不是文章列表，而是一张「档案卡」：492 篇记录、476 天有字、3,046 张图，天气与时间实时。</i></p>
 
@@ -17,12 +17,12 @@
 
 | 课程 | 记录 |
 | --- | --- |
-| ![课程页](docs/shot-courses.png) | ![记录](docs/shot-journal.png) |
+| ![课程页](https://cdn.jsdelivr.net/gh/hx2167564036-hash/doupi-site@main/docs/shot-courses.png) | ![记录](https://cdn.jsdelivr.net/gh/hx2167564036-hash/doupi-site@main/docs/shot-journal.png) |
 | 5 个学期 / 57 门课 / 163 条章节 / 课件下载 | 数字随滚动 0→492，热力图逐列点亮 |
 
 | 时间轴 |
 | --- |
-| ![时间轴](docs/shot-daily.png) |
+| ![时间轴](https://cdn.jsdelivr.net/gh/hx2167564036-hash/doupi-site@main/docs/shot-daily.png) |
 | 一天一行，断更处插「留白 N 天」分隔 |
 
 ## 结构
