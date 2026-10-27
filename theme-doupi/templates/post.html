@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="https://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" th:href="@{/assets/img/favicon.ico}" sizes="any" />
+  <link rel="icon" type="image/png" sizes="32x32" th:href="@{/assets/img/favicon-32.png}" />
+  <link rel="apple-touch-icon" th:href="@{/assets/img/apple-touch-icon.png}" />
+  <link rel="manifest" th:href="@{/assets/site.webmanifest}" />
+  <meta name="theme-color" content="#FAFAFC" />
+
+  <title th:text="${post.spec.title} + ' · 豆皮'">文章 · 豆皮</title>
+  <meta name="description" th:content="${post.status.excerpt != null ? post.status.excerpt : '豆皮的每日记录与笔记'}" />
+  <link rel="stylesheet" th:href="@{/assets/css/base.css}" />
+</head>
+<body>
+
+<header th:replace="~{modules/layout :: nav('记录')}"></header>
+
+<main class="wrap">
+  <article>
+    <header class="post-head">
+      <p class="kicker">
+        <span th:if="${post.categories != null and !#lists.isEmpty(post.categories)}"
+              th:text="${post.categories[0].spec.displayName}">每日记录</span>
+        <span th:if="${post.categories == null or #lists.isEmpty(post.categories)}">记录</span>
+      </p>
+      <h1 class="title" th:text="${post.spec.title}">2026-10-08 Day492</h1>
+      <div class="post-meta">
+        <span th:text="${post.spec.publishTime != null and #strings.length(post.spec.publishTime) >= 10 ? #strings.substring(post.spec.publishTime, 0, 10) : ''}">2026-10-08</span>
+        <th:block th:if="${post.categories != null and !#lists.isEmpty(post.categories)}">
+          <span class="dot"></span>
+          <a th:href="@{${post.categories[0].status.permalink}}" th:text="${post.categories[0].spec.displayName}">每日记录</a>
+        </th:block>
+        <th:block th:if="${post.tags != null and !#lists.isEmpty(post.tags)}">
+          <span class="dot"></span>
+          <a th:each="tag : ${post.tags}" th:href="@{${tag.status.permalink}}" th:text="${'#' + tag.spec.displayName}">#Halo</a>
+        </th:block>
+      </div>
+    </header>
+
+    <figure class="post-cover" th:if="${post.spec.cover != null and !#strings.isEmpty(post.spec.cover)}">
+      <img th:src="${post.spec.cover}" th:alt="${post.spec.title}" loading="eager" />
+    </figure>
+
+    <div class="prose" th:utext="${post.content.content}">
+      正文
+    </div>
+
+    <nav class="pager">
+      <a th:if="${prevPost != null}" th:href="@{${prevPost.status.permalink}}">
+        <span class="dir">上一篇</span>
+        <span class="t" th:text="${prevPost.spec.title}">上一篇标题</span>
+      </a>
+      <span th:if="${prevPost == null}"></span>
+      <a class="next" th:if="${nextPost != null}" th:href="@{${nextPost.status.permalink}}">
+        <span class="dir">下一篇</span>
+        <span class="t" th:text="${nextPost.spec.title}">下一篇标题</span>
+      </a>
+    </nav>
+  </article>
+</main>
+
+<footer th:replace="~{modules/layout :: footer}"></footer>
+</body>
+</html>

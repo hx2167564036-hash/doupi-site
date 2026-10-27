@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="https://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" th:href="@{/assets/img/favicon.ico}" sizes="any" />
+  <link rel="icon" type="image/png" sizes="32x32" th:href="@{/assets/img/favicon-32.png}" />
+  <link rel="apple-touch-icon" th:href="@{/assets/img/apple-touch-icon.png}" />
+  <link rel="manifest" th:href="@{/assets/site.webmanifest}" />
+  <meta name="theme-color" content="#FAFAFC" />
+
+  <title>出了点问题 · 豆皮</title>
+  <link rel="stylesheet" th:href="@{/assets/css/base.css}" />
+  <style>
+    .big{font-size:clamp(80px,16vw,180px); line-height:.9; letter-spacing:-.06em; font-weight:600; margin:0}
+  </style>
+</head>
+<body>
+
+<header th:replace="~{modules/layout :: nav('')}"></header>
+
+<main class="wrap" style="padding-top:clamp(60px,10vw,140px)">
+  <p class="kicker">500 / SERVER ERROR</p>
+  <p class="big">500</p>
+  <p class="lead" style="margin-top:22px">服务端出了点问题，刷新一下可能就好了。</p>
+  <p style="margin-top:26px"><a th:href="@{/}" style="border-bottom:1px solid currentColor">回首页 ↗</a></p>
+</main>
+
+<footer th:replace="~{modules/layout :: footer}"></footer>
+</body>
+</html>

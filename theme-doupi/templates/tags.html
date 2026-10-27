@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="https://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" th:href="@{/assets/img/favicon.ico}" sizes="any" />
+  <link rel="icon" type="image/png" sizes="32x32" th:href="@{/assets/img/favicon-32.png}" />
+  <link rel="apple-touch-icon" th:href="@{/assets/img/apple-touch-icon.png}" />
+  <link rel="manifest" th:href="@{/assets/site.webmanifest}" />
+  <meta name="theme-color" content="#FAFAFC" />
+
+  <title>标签 · 豆皮</title>
+  <link rel="stylesheet" th:href="@{/assets/css/base.css}" />
+</head>
+<body>
+
+<header th:replace="~{modules/layout :: nav('记录')}"></header>
+
+<main class="wrap">
+  <header class="hero">
+    <p class="kicker">TAGS</p>
+    <h1 class="title">标签</h1>
+    <p class="lead">共 <b th:text="${#lists.size(tags)}">1</b> 个标签。</p>
+  </header>
+
+  <div class="chips">
+    <a class="chip" th:each="t : ${tags}" th:href="@{${t.status.permalink}}"
+       th:text="${t.spec.displayName + ' · ' + (t.status.postCount ?: 0)}">Halo · 0</a>
+  </div>
+</main>
+
+<footer th:replace="~{modules/layout :: footer}"></footer>
+</body>
+</html>

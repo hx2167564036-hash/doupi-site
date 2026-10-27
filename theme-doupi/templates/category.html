@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="https://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" th:href="@{/assets/img/favicon.ico}" sizes="any" />
+  <link rel="icon" type="image/png" sizes="32x32" th:href="@{/assets/img/favicon-32.png}" />
+  <link rel="apple-touch-icon" th:href="@{/assets/img/apple-touch-icon.png}" />
+  <link rel="manifest" th:href="@{/assets/site.webmanifest}" />
+  <meta name="theme-color" content="#FAFAFC" />
+
+  <title th:text="${(category != null ? category.spec.displayName : '分类') + ' · 豆皮'}">分类 · 豆皮</title>
+  <link rel="stylesheet" th:href="@{/assets/css/base.css}" />
+</head>
+<body>
+
+<header th:replace="~{modules/layout :: nav('记录')}"></header>
+
+<main class="wrap">
+  <header class="hero">
+    <p class="kicker">CATEGORY</p>
+    <h1 class="title" th:text="${category != null ? category.spec.displayName : '分类'}">每日记录</h1>
+    <p class="lead">
+      共 <b th:text="${posts != null ? posts.total : 0}">492</b> 篇。
+      <span th:if="${category != null and category.spec.description != null and !#strings.isEmpty(category.spec.description)}"
+            th:text="${' ' + category.spec.description}">描述</span>
+    </p>
+  </header>
+
+  <div class="list">
+    <a class="item" th:each="p : ${posts.items}" th:href="@{${p.status.permalink}}">
+      <span class="d" th:text="${p.spec.publishTime != null and #strings.length(p.spec.publishTime) >= 10 ? #strings.substring(p.spec.publishTime, 5, 10) : ''}">10-08</span>
+      <span class="t" th:text="${p.spec.title}">标题</span>
+      <span class="n" th:text="${p.spec.slug}">slug</span>
+    </a>
+  </div>
+
+  <div class="pagination" th:if="${posts != null and posts.pages > 0}">
+    <a th:if="${posts.hasPrevious}" th:href="@{${category.status.permalink}(page=${posts.page - 1})}">上一页</a>
+    <span class="current" th:text="${posts.page + 1}">1</span>
+    <span th:text="${'/ ' + posts.pages}">/ 5</span>
+    <a th:if="${posts.hasNext}" th:href="@{${category.status.permalink}(page=${posts.page + 1})}">下一页</a>
+  </div>
+</main>
+
+<footer th:replace="~{modules/layout :: footer}"></footer>
+</body>
+</html>

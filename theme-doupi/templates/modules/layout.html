@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org" lang="zh-CN">
+<head><meta charset="UTF-8"></head>
+<body>
+
+<!-- ===== 顶部导航（所有页面共用） active: 项目 / 能力 / 课程 / 资料柜 / 记录 / 视频 ===== -->
+<header class="nav" id="nav" th:fragment="nav(active)"
+        th:classappend="${active != null and active != ''} ? ''">
+  <a class="brand" th:href="@{/}"><img class="brand-ava" th:src="@{/assets/img/avatar.webp}" alt="">豆皮<small>DOUPI</small></a>
+  <nav>
+    <a th:href="@{/#work}" th:classappend="${active == '项目'} ? 'on'">项目</a>
+    <a th:href="@{/#skills}" th:classappend="${active == '能力'} ? 'on'">能力</a>
+    <a th:href="@{/courses}" th:classappend="${active == '课程'} ? 'on'">课程</a>
+    <a th:href="@{/#shelf}" th:classappend="${active == '资料柜'} ? 'on'">资料柜</a>
+    <a th:href="@{/daily}" th:classappend="${active == '记录'} ? 'on'">记录</a>
+    <a th:href="@{/videos}" th:classappend="${active == '视频'} ? 'on'">视频</a>
+  </nav>
+</header>
+<script>
+  (function(){var n=document.getElementById('nav');
+    if(!n)return;
+    var f=function(){n.classList.toggle('solid',(window.scrollY||0)>8)};
+    f(); addEventListener('scroll',f,{passive:true});})();
+</script>
+
+<!-- ===== 页脚（文章页 / 单页 / 归档等共用） ===== -->
+<footer class="footer" th:fragment="footer">
+  <div class="in">
+    <div>
+      <h3>豆皮</h3>
+      <p>软件工程在读本科生。这里是我整理项目、笔记和每天记录的地方。</p>
+    </div>
+    <div>
+      <h4>导航</h4>
+      <a th:href="@{/#work}">项目</a>
+      <a th:href="@{/#skills}">能力</a>
+      <a th:href="@{/courses}">课程</a>
+      <a th:href="@{/#shelf}">资料柜</a>
+      <a th:href="@{/daily}">记录</a>
+      <a th:href="@{/videos}">视频</a>
+    </div>
+    <div>
+      <h4>外面</h4>
+      <a href="https://github.com/" target="_blank" rel="noopener">GitHub</a>
+      <a href="mailto:hi@doupi123.top">邮件</a>
+      <a href="https://space.bilibili.com/285926003" target="_blank" rel="noopener">B 站</a>
+      <a th:href="@{/archives}">归档</a>
+    </div>
+    <div>
+      <h4>统计</h4>
+      <div class="row"><span>记录 / 有字的天</span><span><span data-live="posts">492</span> / <span data-live="days">476</span></span></div>
+      <div class="row"><span>图片资料</span><span><span data-live="images">3,169</span> 张</span></div>
+      <div class="row"><span>上线以来</span><span>566 天</span></div>
+    </div>
+  </div>
+  <div class="base">
+    <span>© 2026 豆皮 · doupi123.top</span>
+    <span>由 Halo 驱动 · 主题 Doupi v1.0.0</span>
+  </div>
+</footer>
+
+</body>
+</html>

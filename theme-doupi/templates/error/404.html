@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="https://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" th:href="@{/assets/img/favicon.ico}" sizes="any" />
+  <link rel="icon" type="image/png" sizes="32x32" th:href="@{/assets/img/favicon-32.png}" />
+  <link rel="apple-touch-icon" th:href="@{/assets/img/apple-touch-icon.png}" />
+  <link rel="manifest" th:href="@{/assets/site.webmanifest}" />
+  <meta name="theme-color" content="#FAFAFC" />
+
+  <title>页面没找到 · 豆皮</title>
+  <link rel="stylesheet" th:href="@{/assets/css/base.css}" />
+  <style>
+    .big{font-size:clamp(90px,20vw,220px); line-height:.86; letter-spacing:-.06em; font-weight:600; margin:0}
+  </style>
+</head>
+<body>
+
+<header th:replace="~{modules/layout :: nav('')}"></header>
+
+<main class="wrap" style="padding-top:clamp(60px,10vw,140px)">
+  <p class="kicker">404 / NOT FOUND</p>
+  <p class="big">404</p>
+  <p class="lead" style="margin-top:22px">这个地址没有内容。可能是链接写错了，也可能那篇记录还没写。</p>
+  <p style="margin-top:26px"><a th:href="@{/}" style="border-bottom:1px solid currentColor">回首页 ↗</a></p>
+</main>
+
+<footer th:replace="~{modules/layout :: footer}"></footer>
+</body>
+</html>

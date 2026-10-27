@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="https://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" th:href="@{/assets/img/favicon.ico}" sizes="any" />
+  <link rel="icon" type="image/png" sizes="32x32" th:href="@{/assets/img/favicon-32.png}" />
+  <link rel="apple-touch-icon" th:href="@{/assets/img/apple-touch-icon.png}" />
+  <link rel="manifest" th:href="@{/assets/site.webmanifest}" />
+  <meta name="theme-color" content="#FAFAFC" />
+
+  <title>归档 · 豆皮</title>
+  <link rel="stylesheet" th:href="@{/assets/css/base.css}" />
+  <style>
+    .wrap{max-width:920px; margin:0 auto; padding:clamp(28px,5vw,64px) var(--pad) 80px}
+    .kicker{font-family:var(--mono); font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:var(--muted)}
+    .title{font-size:clamp(38px,6vw,72px); letter-spacing:-.045em; margin:.2em 0 .3em}
+    .lead{color:var(--muted); font-size:15px; margin:0 0 clamp(24px,4vw,44px)}
+    .lead a{color:var(--ink); border-bottom:1px solid currentColor}
+    .list-year{display:flex; align-items:baseline; gap:12px; margin:clamp(22px,3.4vw,36px) 0 10px;
+      padding-bottom:8px; border-bottom:1px solid var(--line)}
+    .list-year h2{margin:0; font-size:22px; letter-spacing:-.02em}
+    .list-year span{font-family:var(--mono); font-size:11px; color:var(--muted)}
+    .item{display:grid; grid-template-columns:64px 1fr auto; gap:14px; align-items:baseline;
+      padding:9px 2px; border-bottom:1px solid var(--line-2); text-decoration:none; color:inherit}
+    .item:hover{background:var(--bg-2)}
+    .item .d{font-family:var(--mono); font-size:12px; color:var(--muted)}
+    .item .t{font-size:15px}
+    .item .n{font-family:var(--mono); font-size:10.5px; color:var(--muted); letter-spacing:.08em}
+    .pagination{display:flex; gap:16px; align-items:center; margin-top:32px; font-size:13px; color:var(--muted)}
+    .pagination a{color:var(--ink); border-bottom:1px solid currentColor; text-decoration:none}
+  </style>
+</head>
+<body>
+
+<header th:replace="~{modules/layout :: nav('记录')}"></header>
+
+<main class="wrap">
+  <p class="kicker">ARCHIVE</p>
+  <h1 class="title">归档</h1>
+  <p class="lead">
+    共 <b th:text="${archives != null ? archives.total : 0}">492</b> 篇。想看按天排的时间轴，去
+    <a th:href="@{/daily}">记录</a>。
+  </p>
+
+  <div class="list">
+    <th:block th:each="year : ${archives.items}">
+      <div class="list-year">
+        <h2 th:text="${year.year}">2026</h2>
+        <span th:text="${#lists.size(year.months) + ' 个月'}">12 个月</span>
+      </div>
+      <th:block th:each="month : ${year.months}">
+        <a class="item" th:each="p : ${month.posts}" th:href="@{${p.status.permalink}}">
+          <span class="d"
+                th:text="${p.spec.title != null and #strings.length(p.spec.title) >= 10 ? #strings.substring(p.spec.title, 5, 10) : ''}">10-08</span>
+          <span class="t" th:text="${p.spec.title}">标题</span>
+          <span class="n"
+                th:text="${p.categories != null and !#lists.isEmpty(p.categories) ? p.categories[0].spec.displayName : ''}">每日记录</span>
+        </a>
+      </th:block>
+    </th:block>
+  </div>
+
+  <div class="pagination" th:if="${archives != null and archives.total > 0}">
+    <a th:if="${archives.hasPrevious}" th:href="@{/archives(page=${archives.page - 1})}">← 上一页</a>
+    <span th:text="${'第 ' + (archives.page + 1) + ' 页'}">第 1 页</span>
+    <a th:if="${archives.hasNext}" th:href="@{/archives(page=${archives.page + 1})}">下一页 →</a>
+  </div>
+</main>
+
+<footer th:replace="~{modules/layout :: footer}"></footer>
+</body>
+</html>

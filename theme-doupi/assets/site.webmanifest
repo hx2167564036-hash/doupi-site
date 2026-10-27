@@ -1,0 +1,27 @@
+{
+  "name": "豆皮 · doupi123.top",
+  "short_name": "豆皮",
+  "description": "软件工程在读本科生。项目、能力、课程、资料柜与每日记录。",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FAFAFC",
+  "theme_color": "#FAFAFC",
+  "icons": [
+    {
+      "src": "/assets/img/favicon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/assets/img/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "/assets/img/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

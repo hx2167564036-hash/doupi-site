@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="zh-CN" xmlns:th="https://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="icon" th:href="@{/assets/img/favicon.ico}" sizes="any" />
+  <link rel="icon" type="image/png" sizes="32x32" th:href="@{/assets/img/favicon-32.png}" />
+  <link rel="apple-touch-icon" th:href="@{/assets/img/apple-touch-icon.png}" />
+  <link rel="manifest" th:href="@{/assets/site.webmanifest}" />
+  <meta name="theme-color" content="#FAFAFC" />
+
+<title th:text="${(singlePage.spec.title ?: '页面') + ' · 豆皮'}">页面 · 豆皮</title>
+  <link rel="stylesheet" th:href="@{/assets/css/base.css}" />
+  <link rel="stylesheet" th:href="@{/assets/css/daily.css}" th:if="${singlePage.spec.slug == 'daily'}" />
+  <link rel="stylesheet" th:href="@{/assets/css/courses.css}" th:if="${singlePage.spec.slug == 'courses'}" />
+  <link rel="stylesheet" th:href="@{/assets/css/videos.css}" th:if="${singlePage.spec.slug == 'videos'}" />
+  <style>
+    .wrap{max-width:820px; margin:0 auto; padding:clamp(28px,5vw,64px) var(--pad) 80px}
+    .wrap h1{font-size:clamp(34px,5vw,56px); letter-spacing:-.04em; margin:.1em 0 .5em}
+    .prose{font-size:16px; line-height:1.85; color:var(--ink)}
+    .prose h2{font-size:24px; margin:1.6em 0 .5em}
+    .prose h3{font-size:19px; margin:1.4em 0 .4em}
+    .prose p{margin:0 0 1em}
+    .prose a{color:inherit; border-bottom:1px solid color-mix(in srgb,var(--ink) 30%,transparent)}
+    .prose img{max-width:100%; height:auto; border-radius:10px}
+    .prose code{background:var(--bg-2); padding:.1em .35em; border-radius:4px; font-size:.92em}
+    .prose pre{background:var(--bg-2); padding:14px 16px; border-radius:10px; overflow:auto}
+    .prose blockquote{border-left:2px solid var(--line); margin:1em 0; padding:.2em 0 .2em 1em; color:var(--muted)}
+  </style>
+</head>
+<body th:with="slug=${singlePage.spec.slug}">
+
+<header th:replace="~{modules/layout :: nav(${slug == 'daily' ? '记录' : (slug == 'courses' ? '课程' : (slug == 'videos' ? '视频' : ''))})}"></header>
+
+<!-- /daily -->
+<th:block th:if="${slug == 'daily'}">
+  <section class="head">
+    <p class="kicker">05 / JOURNAL</p>
+    <h1>记录</h1>
+    <p class="sub"><b><span data-live="posts">492</span> 篇</b>，从 <span data-live="first">2025-04-09</span> 写到 <span data-live="last">2026-10-08</span>；一共 <span data-live="span">548</span> 天，其中 <b><span data-live="days">476</span> 天有字</b>，<span data-live="blank">72</span> 天留白。点任意一天跳到原文。</p>
+  </section>
+
+  <div class="hm-wrap">
+    <div class="hm" id="hm"></div>
+    <div class="hm-legend"><span>少</span><span><i style="width:9px;height:9px;border-radius:2px;background:#E9E9EE;display:block"></i>
+      <i style="width:9px;height:9px;border-radius:2px;background:#1D1D1F;display:block"></i></span><span>有字</span>
+      <span style="margin-left:auto">每周一列 · 悬停看日期</span></div>
+  </div>
+
+  <div class="layout">
+    <aside class="side">
+      <div class="search"><input id="q" type="search" placeholder="搜日期 / Day 号…" autocomplete="off"></div>
+      <div class="rail" id="rail"></div>
+    </aside>
+    <div class="tl" id="tl"></div>
+  </div>
+
+  <script th:src="@{/assets/data/daily.js}"></script>
+  <script th:src="@{/assets/js/daily.js}" defer></script>
+</th:block>
+
+<!-- /courses -->
+<th:block th:if="${slug == 'courses'}">
+  <section class="head">
+    <p class="kicker">03 / COURSES</p>
+    <h1>课程</h1>
+    <p class="sub">5 个学期 · <b>57 门课</b> · <b>438 份课件</b>可下载 · 163 条章节。
+      章节结构来自教务系统；课件放在服务器上，点文件名下载（需要口令）。</p>
+  </section>
+
+  <div class="layout">
+    <aside class="side">
+      <div class="search"><input id="q" type="search" placeholder="搜课程 / 章节…" autocomplete="off"></div>
+      <div class="terms" id="terms"></div>
+    </aside>
+    <div class="list" id="list"></div>
+  </div>
+
+  <script th:src="@{/assets/data/courses.js}"></script>
+  <script th:src="@{/assets/js/courses.js}" defer></script>
+</th:block>
+
+
+<!-- /videos -->
+<th:block th:if="${slug == 'videos'}">
+  <main class="vwrap">
+    <section class="vhead">
+      <p class="kicker">06 / VIDEOS</p>
+      <h1>视频</h1>
+      <p>记录类短片，横屏与竖屏各一版。点封面就在这一页看，也可以去 B 站（画质与弹幕更全）。</p>
+    </section>
+
+    <div class="vgrid" id="vgrid"></div>
+
+    <section class="drafts">
+      <h2>还在剪的</h2>
+      <p class="sub">本地剪映工程，还没成片 —— 素材先存着，等有空再剪。</p>
+      <ul id="drafts"></ul>
+    </section>
+
+    <p class="vfoot">全部作品在 <a href="https://space.bilibili.com/285926003" target="_blank" rel="noopener">B 站 · 豆皮 ↗</a></p>
+  </main>
+
+  <script th:src="@{/assets/data/videos.js}"></script>
+  <script th:src="@{/assets/js/videos.js}" defer></script>
+</th:block>
+
+<!-- 其他页面：直接渲染正文（正文自带标题，这里不再重复一遍） -->
+<main class="wrap bare" th:if="${slug != 'daily' and slug != 'courses'}">
+  <div class="prose" th:utext="${singlePage.content.content}">正文</div>
+</main>
+
+<script th:src="@{/assets/js/live.js}" defer></script>
+<footer>
+  <span><b>豆皮</b> · doupi123.top</span>
+  <span>原文托管在 Halo · 本地另有 492 份按天导出的 PDF</span>
+</footer>
+</body>
+</html>

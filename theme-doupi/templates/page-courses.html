@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="zh-CN" xmlns:th="https://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="icon" th:href="@{/assets/img/favicon.ico}" sizes="any" />
+  <link rel="icon" type="image/png" sizes="32x32" th:href="@{/assets/img/favicon-32.png}" />
+  <link rel="apple-touch-icon" th:href="@{/assets/img/apple-touch-icon.png}" />
+  <link rel="manifest" th:href="@{/assets/site.webmanifest}" />
+  <meta name="theme-color" content="#FAFAFC" />
+
+<title>课程 · 豆皮</title>
+  <link rel="stylesheet" th:href="@{/assets/css/base.css}" />
+  <link rel="stylesheet" th:href="@{/assets/css/courses.css}" />
+  <meta name="description" content="5 个学期 57 门课、719 份课件的索引，只列课程、章节与文件名。" />
+</head>
+<body>
+<header th:replace="~{modules/layout :: nav('课程')}"></header>
+
+<section class="head">
+  <p class="kicker">03 / COURSES</p>
+  <h1>课程</h1>
+  <p class="sub">5 个学期 · <b>57 门课</b> · <b>438 份课件</b>可下载 · 163 条章节。
+    章节结构来自教务系统；课件放在服务器上，点文件名下载（先输口令）。</p>
+</section>
+
+<div class="layout">
+  <aside class="side">
+    <div class="search"><input id="q" type="search" placeholder="搜课程 / 章节…" autocomplete="off"></div>
+    <div class="terms" id="terms"></div>
+  </aside>
+  <div class="list" id="list"></div>
+</div>
+
+<footer>
+  <span><b>豆皮</b> · doupi123.top</span>
+  <span>数据来自「上下文中枢」· 课件与作业只在本地保管</span>
+</footer>
+
+  <script th:src="@{/assets/data/courses.js}"></script>
+  <script th:src="@{/assets/js/courses.js}" defer></script>
+</body>
+</html>

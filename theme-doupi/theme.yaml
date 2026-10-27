@@ -1,0 +1,40 @@
+apiVersion: theme.halo.run/v1alpha1
+kind: Theme
+metadata:
+  name: theme-doupi
+spec:
+  displayName: Doupi
+  author:
+    name: 豆皮
+    website: https://doupi123.top
+  description: 个人档案式主题：项目 / 能力 / 课程 / 资料柜 / 记录 / 视频，亮色为主，滚动动效参考 Apple 官网。
+  logo: /themes/theme-doupi/assets/img/avatar.webp
+  homepage: https://doupi123.top
+  repo: https://doupi123.top
+  license:
+    - name: MIT
+  version: 1.0.0
+  requires: ">=2.0.0"
+  customTemplates:
+    page:
+      - name: default
+        description: 默认页面
+        file: page.html
+      - name: daily
+        description: 记录时间轴
+        file: page-daily.html
+      - name: courses
+        description: 课程清单
+        file: page-courses.html
+    post:
+      - name: default
+        description: 默认文章
+        file: post.html
+    category:
+      - name: default
+        description: 默认分类
+        file: category.html
+    tag:
+      - name: default
+        description: 默认标签
+        file: tag.html

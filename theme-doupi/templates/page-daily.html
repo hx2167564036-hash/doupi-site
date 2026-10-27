@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="zh-CN" xmlns:th="https://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="icon" th:href="@{/assets/img/favicon.ico}" sizes="any" />
+  <link rel="icon" type="image/png" sizes="32x32" th:href="@{/assets/img/favicon-32.png}" />
+  <link rel="apple-touch-icon" th:href="@{/assets/img/apple-touch-icon.png}" />
+  <link rel="manifest" th:href="@{/assets/site.webmanifest}" />
+  <meta name="theme-color" content="#FAFAFC" />
+
+<title>记录 · 豆皮</title>
+  <link rel="stylesheet" th:href="@{/assets/css/base.css}" />
+  <link rel="stylesheet" th:href="@{/assets/css/daily.css}" />
+  <meta name="description" content="492 篇记录的时间轴，从 Day 000 到今天，中间留白 72 天。" />
+</head>
+<body>
+<header th:replace="~{modules/layout :: nav('记录')}"></header>
+
+<section class="head">
+  <p class="kicker">05 / JOURNAL</p>
+  <h1>记录</h1>
+  <p class="sub"><b>492 篇</b>，从 2025-04-09 写到 2026-10-08；一共 548 天，其中 <b>476 天有字</b>，
+    72 天留白。点任意一天跳到原文。</p>
+</section>
+
+<div class="hm-wrap">
+  <div class="hm" id="hm"></div>
+  <div class="hm-legend"><span>少</span><span><i style="width:9px;height:9px;border-radius:2px;background:#E9E9EE;display:block"></i>
+    <i style="width:9px;height:9px;border-radius:2px;background:#1D1D1F;display:block"></i></span><span>有字</span>
+    <span style="margin-left:auto">每周一列 · 悬停看日期</span></div>
+</div>
+
+<div class="layout">
+  <aside class="side">
+    <div class="search"><input id="q" type="search" placeholder="搜日期 / Day 号…" autocomplete="off"></div>
+    <div class="rail" id="rail"></div>
+  </aside>
+  <div class="tl" id="tl"></div>
+</div>
+
+<footer>
+  <span><b>豆皮</b> · doupi123.top</span>
+  <span>原文托管在 Halo · 本地另有 492 份按天导出的 PDF</span>
+</footer>
+
+  <script th:src="@{/assets/data/daily.js}"></script>
+  <script th:src="@{/assets/js/daily.js}" defer></script>
+</body>
+</html>
